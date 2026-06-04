@@ -8,13 +8,13 @@ redis_client = redis.Redis(host='redis',decode_responses=True)
 @app.route('/')
 def home():
 	visit_count = redis_client.incr('visit')
-	return f"hello from docker, you visit {visit_count} times "
-	
+	return f"Hello from Docker! 🐳 BIND MOUNT WORKS! You've visited {visit_count} times."
+
 @app.route('/reset')
 def reset():
 	redis_client.delete('visit')
 	return "Visit Count reset!"
-	
+
 @app.route('/about')
 def about():
 	return "this pages is still developing"
@@ -36,4 +36,4 @@ def Team():
 
 if __name__ == '__main__':
 
-	app.run(host="0.0.0.0",port=5000)
+	app.run(debug=True,host="0.0.0.0",port=5000)
